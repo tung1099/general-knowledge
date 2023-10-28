@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StopWatch;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Slf4j
@@ -32,8 +33,8 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
-    public User findById(String id) {
-        return mongoTemplate.findById(id, User.class);
+    public Optional<User> findById(String id) {
+        return Optional.ofNullable(mongoTemplate.findById(id, User.class));
     }
 
     @Override

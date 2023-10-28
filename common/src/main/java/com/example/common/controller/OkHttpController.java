@@ -1,8 +1,7 @@
 package com.example.common.controller;
 
 import com.example.common.model.RequestUser;
-import com.example.common.service.okhttp.OkHttpService;
-import com.example.common.utils.GsonUtil;
+import com.example.common.service.OkHttpService;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

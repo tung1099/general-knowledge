@@ -1,4 +1,4 @@
-package com.example.common.service.okhttp;
+package com.example.common.service;
 
 import com.example.common.common.OkHttpCommon;
 import com.example.common.utils.BenchMarkUtils;

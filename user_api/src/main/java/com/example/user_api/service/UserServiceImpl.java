@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class IUserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService{
     @Autowired
     IUserRepository userRepository;
     @Override

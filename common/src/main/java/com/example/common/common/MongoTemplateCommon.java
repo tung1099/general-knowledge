@@ -2,11 +2,12 @@ package com.example.common.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperationContext;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 @Slf4j
 public class MongoTemplateCommon {
     public AggregationOperation buildConvertToObjectId(String fieldToConvert) {

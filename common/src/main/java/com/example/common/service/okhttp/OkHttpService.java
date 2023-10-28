@@ -25,16 +25,13 @@ public class OkHttpService {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Value("${api.url.post}")
-    String apiUrlPost;
-
-    @Value("${api.url.get}")
-    String apiUrlGet;
+    @Value("${api.url}")
+    String apiUrl;
 
     public ResponseEntity<JsonNode> getData() {
         StopWatch start = BenchMarkUtils.start();
         try {
-            JsonNode result = common.okHttpGET(apiUrlGet);
+            JsonNode result = common.okHttpGET(apiUrl);
             BenchMarkUtils.end(start, "get data");
 
             if (result != null) {
@@ -55,7 +52,7 @@ public class OkHttpService {
         JsonNode responseEntity = null;
 
         try {
-            responseEntity = common.okHttpPOST(apiUrlPost, object);
+            responseEntity = common.okHttpPOST(apiUrl, object);
             BenchMarkUtils.end(start, "post");
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +63,7 @@ public class OkHttpService {
 
     public ResponseEntity<String> postData(String json, String url){
         try {
-            common.okHttpPOSTJsonResponse(json, apiUrlPost);
+            common.okHttpPOSTJsonResponse(json, apiUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +95,7 @@ public class OkHttpService {
             }
         };
 
-        common.okHttpPOSTAsync(apiUrlPost, object, callback);
+        common.okHttpPOSTAsync(apiUrl, object, callback);
         return "OK";
     }
 }

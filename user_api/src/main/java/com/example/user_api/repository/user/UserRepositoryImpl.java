@@ -1,6 +1,9 @@
 package com.example.user_api.repository.user;
 
 import com.example.common.common.MongoTemplateCommon;
+import com.example.common.utils.BenchMarkUtils;
+import com.example.user_api.model.User;
+import com.example.user_api.model.UserWithDepartment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,6 +14,7 @@ import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StopWatch;
 
 import java.util.List;
 
@@ -40,6 +44,7 @@ public class UserRepositoryImpl implements IUserRepository {
     }
     @Override
     public List<UserWithDepartment> findUsersWithDepartments() {
+        StopWatch start = BenchMarkUtils.start();
         AggregationOperation convertDepartmentIdToObjectId = mongoTemplateCommon.buildConvertToObjectId("departmentId");
         Aggregation aggregation = Aggregation.newAggregation(
                 convertDepartmentIdToObjectId,
@@ -50,6 +55,7 @@ public class UserRepositoryImpl implements IUserRepository {
                         .as("departments")
         );
         AggregationResults<UserWithDepartment> results = mongoTemplate.aggregate(aggregation, "user", UserWithDepartment.class);
+        BenchMarkUtils.end(start, "find user with department");
         return results.getMappedResults();
     }
 

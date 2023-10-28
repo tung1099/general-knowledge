@@ -1,5 +1,8 @@
 package com.example.user_api.repository.user;
 
+import com.example.user_api.model.User;
+import com.example.user_api.model.UserWithDepartment;
+
 import java.util.List;
 
 public interface IUserRepository {

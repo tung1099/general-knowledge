@@ -45,4 +45,10 @@ public class UserController {
         Optional<User> users = userService.findById(id);
         return ResponseEntity.ok(users);
     }
+    @GetMapping("/with-department")
+    public ResponseEntity<?> findUsersWithDepartments(){
+        log.info("\n--------------------------------------------------------------------------->\n");
+        log.info("[GET] ['{}']", ServletUriComponentsBuilder.fromCurrentRequest().build());
+        return ResponseEntity.ok(userRepository.findUsersWithDepartments());
+    }
 }

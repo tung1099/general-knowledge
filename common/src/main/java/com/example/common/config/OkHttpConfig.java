@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @Slf4j
 public class OkHttpConfig {
-    @Value("${server.timeout}")
+    @Value("${server.timeout.sec}")
     private int timeout;
 
     @Bean
@@ -30,9 +30,9 @@ public class OkHttpConfig {
     public OkHttpClient okHttpClient(ConnectionPool connectionPool) {
         return new OkHttpClient.Builder()
                 .followRedirects(false)
-                .connectTimeout(timeout, TimeUnit.MILLISECONDS)
-                .readTimeout(timeout, TimeUnit.MILLISECONDS)
-                .writeTimeout(timeout, TimeUnit.MILLISECONDS)
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
+                .writeTimeout(timeout, TimeUnit.SECONDS)
                 .sslSocketFactory((trustAllSslSocketFactory), (X509TrustManager)trustAllCerts[0])
                 .hostnameVerifier((hostname, session) -> true)
                 .connectionPool(connectionPool)

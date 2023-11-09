@@ -5,3 +5,8 @@ spring:
       - host: 127.0.0.1
         port: 27017
     authSource: Common
+#  elasticsearch:
+#    enabled: true
+#    rest:
+#      hosts: 127.0.0.1:9200
+#    clusterName: elasticsearch

@@ -20,12 +20,8 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOGS}/%d{yyyy-MM}/${SERVICE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
 
-            <!-- Thêm đoạn này để thêm sự kích thích cho quay vòng theo thời gian -->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
 

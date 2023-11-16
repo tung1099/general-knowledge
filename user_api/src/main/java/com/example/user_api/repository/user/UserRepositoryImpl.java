@@ -94,4 +94,9 @@ public class UserRepositoryImpl implements IUserRepository {
         AggregationResults<UserWithDepartment> results = mongoTemplate.aggregate(aggregation, "user", UserWithDepartment.class);
         return results.getMappedResults();
     }
+
+    @Override
+    public User save(User user) {
+        return mongoTemplate.save(user);
+    }
 }

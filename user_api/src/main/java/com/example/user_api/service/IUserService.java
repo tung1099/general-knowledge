@@ -13,4 +13,5 @@ public interface IUserService {
     List<UserWithDepartment> findUsersWithDepartments();
     List<UserWithDepartment> findUsersByNameAndAge(String name, int age);
     List<UserWithDepartment> findUsersInAgeRangeWithField(int minAge, int maxAge);
+    User saveActive(User user);
 }

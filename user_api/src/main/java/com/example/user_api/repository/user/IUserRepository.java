@@ -13,4 +13,5 @@ public interface IUserRepository {
     List<UserWithDepartment> findUsersWithDepartments();
     List<UserWithDepartment> findUsersByNameAndAge(String name, int age);
     List<UserWithDepartment> findUsersInAgeRangeWithField(int minAge, int maxAge);
+    User save (User user);
 }

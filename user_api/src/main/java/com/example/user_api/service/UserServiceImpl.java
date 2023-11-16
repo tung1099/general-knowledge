@@ -5,8 +5,11 @@ import com.example.common.utils.BenchMarkUtils;
 import com.example.user_api.model.User;
 import com.example.user_api.model.UserWithDepartment;
 import com.example.user_api.repository.user.IUserRepository;
+import com.example.user_api.repository.user.UserRepositoryImpl;
+import com.example.user_api.service.activemq.impl.ActiveMQServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
@@ -17,7 +20,14 @@ import java.util.Optional;
 @Slf4j
 public class UserServiceImpl implements IUserService{
     @Autowired
-    IUserRepository userRepository;
+    UserRepositoryImpl userRepository;
+
+    @Autowired
+    ActiveMQServiceImpl activeMQService;
+
+    @Value("${activemq_queue_name}")
+    String queueName;
+
     @Override
     public List<User> findAll() {
         StopWatch start = BenchMarkUtils.start();
@@ -52,5 +62,12 @@ public class UserServiceImpl implements IUserService{
     @Override
     public List<UserWithDepartment> findUsersInAgeRangeWithField(int minAge, int maxAge) {
         return null;
+    }
+
+    @Override
+    public User saveActive(User user) {
+        userRepository.save(user);
+        activeMQService.sendMessage(queueName,user);
+        return user;
     }
 }
